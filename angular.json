@@ -117,8 +117,16 @@
               "devServerTarget": "task1:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "task1"
+    }
+  },
+  "defaultProject": "task1",
+  "cli": {
+    "analytics": false
+  }
 }

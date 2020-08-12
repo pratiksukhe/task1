@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "github-firebase-15703": {
+      "hosting": {
+        "task1": [
+          "github-firebase-15703"
+        ]
+      }
+    }
+  }
+}
