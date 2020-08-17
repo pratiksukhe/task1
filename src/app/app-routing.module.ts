@@ -4,6 +4,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { PagenotfoundComponent } from './pages/pagenotfound/pagenotfound.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { SigninWithPhoneComponent } from './pages/signin-with-phone/signin-with-phone.component';
 
 import { AuthGuard } from './_helpers/auth.guard';
 const routes: Routes = [
@@ -14,8 +15,9 @@ const routes: Routes = [
   },
   { path: 'signup', component: SignupComponent },
   { path: 'signin', component: SigninComponent },
+  { path: 'phone', component: SigninWithPhoneComponent },
 
-  { path: '', redirectTo: '/signup', pathMatch: 'full' },
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
 
   {
     path: '**',

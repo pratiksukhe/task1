@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row mt-5">
+    <div class="col col-6 offset-3">
+      <div class="card">
+        <div class="card-header text-center text-info text-uppercase">
+          Sign In Please
+        </div>
+
+        <div class="card-body">
+          <div class="form-group row">
+            <label for="phoneNumber" class="col-sm-3 col-form-label"
+              >Phone</label
+            >
+            <div class="col-sm-6">
+              <input
+                type="text"
+                name="phone"
+                placeholder="eg. 9503874551"
+                [(ngModel)]="phoneNumber"
+                required
+              />
+            </div>
+
+            <button
+              class="btn btn-primary"
+              [disabled]="disableOTPSendButton"
+              (click)="sendOtp()"
+            >
+              send OTP
+            </button>
+            <div id="recaptcha-container"></div>
+          </div>
+
+          <div class="form-group row">
+            <label for="phoneNumber" class="col-sm-3 col-form-label">OTP</label>
+            <div class="col-sm-6">
+              <input type="text" name="otp" [(ngModel)]="otp" required />
+            </div>
+
+            <button class="btn btn-primary" (click)="verifyOTP()">
+              Verify OTP
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

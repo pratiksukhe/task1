@@ -69,12 +69,22 @@
 
               <div class="form-group col">
                 <label>Signup as Student/Teacher</label>
-                <input
+                <select
+                  name="role"
+                  id="role"
+                  formControlName="role"
+                  [ngClass]="{ 'is-invalid': submitted && h.role.errors }"
+                  class="form-control"
+                >
+                  <option value="student">Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+                <!-- <input
                   formControlName="role"
                   [ngClass]="{ 'is-invalid': submitted && h.role.errors }"
                   type="text"
                   class="form-control"
-                />
+                /> -->
                 <div *ngIf="submitted && h.role.errors" class="text-warning">
                   <div *ngIf="h.role.errors.required">
                     Signup as is required
@@ -161,6 +171,9 @@
               <p class="text white">Value: {{ registerForm.value | json }}</p>
               <p class="text white">Value: {{ registerForm.valid | json }}</p>
             </div>
+            <p>
+              Already register <a routerLink="/signin">click here for login</a>
+            </p>
           </form>
         </div>
       </div>

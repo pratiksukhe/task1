@@ -9,6 +9,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   email: string;
+  phoneNumber: string;
   constructor(
     private router: Router,
     private toastr: ToastrService,

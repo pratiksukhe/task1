@@ -41,7 +41,7 @@ export class SigninComponent implements OnInit {
       .signIn(email, password)
       .then((res) => {
         this.toastr.success('SignIn Success...!!');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('dashboard');
       })
       .catch((error) => {
         this.toastr.error('Something is wrong' + error.message);

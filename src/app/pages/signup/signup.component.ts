@@ -75,9 +75,9 @@ export class SignupComponent implements OnInit {
           role: role,
         });
       })
-      .then((res) => {
-        this.router.navigateByUrl('/');
-        //this.toastr.success('SignUp Success..!  Please Login here..!');
+      .then(() => {
+        this.router.navigateByUrl('/dashboard');
+        this.toastr.success('SignUp Success..!');
       })
       .catch((error) => {
         this.toastr.error('Something is going wrong in signup' + error.message);
