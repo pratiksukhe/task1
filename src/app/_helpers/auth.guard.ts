@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -9,11 +9,17 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
+
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -22,13 +28,11 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    const currentUser = this.auth.getUser();
-    if (currentUser) {
+    if (this.auth.isLoggedIn) {
       return true;
+    } else {
+      this.toastr.error('Access denied please login first..!!');
+      this.router.navigate(['signin']);
     }
-    // not logged in so redirect to login page with the return url
-    return this.router.navigate(['/signin'], {
-      queryParams: { returnUrl: state.url },
-    });
   }
 }

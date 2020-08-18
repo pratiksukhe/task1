@@ -52,9 +52,10 @@ export class SigninWithPhoneComponent implements OnInit, AfterViewInit {
     this.windowRef.confirmationResult
       .confirm(this.otp)
       .then((userCredentials) => {
-        let user = userCredentials.user;
         console.log(userCredentials);
-        this.toastr.success('SignIn success..!! Welcome' + user);
+        this.toastr.success(
+          'SignIn success..!! Welcome' + userCredentials.user.phoneNumber
+        );
         this.router.navigateByUrl('/dashboard');
       });
   }

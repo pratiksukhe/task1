@@ -10,13 +10,16 @@ import { AuthService } from '../../services/auth.service';
 export class HeaderComponent implements OnInit {
   email: string;
   phoneNumber: string;
+  user: object;
   constructor(
     private router: Router,
     private toastr: ToastrService,
     private auth: AuthService
   ) {
     auth.getUser().subscribe((user) => {
-      this.email = user?.email;
+      console.log(user);
+
+      this.user = user;
     });
   }
 

@@ -5,27 +5,27 @@
   </a>
   <div class="navbar-collapse">
     <div class="navbar-nav ml-auto">
-      <div *ngIf="email" class="navbar-text float-left">
-        {{ email }}
+      <div *ngIf="user" class="navbar-text float-left">
+        {{ user.email }}
       </div>
-      <a *ngIf="email" [routerLink]="['/dashboard']" class="nav-item nav-link"
+      <a *ngIf="user" [routerLink]="['/dashboard']" class="nav-item nav-link"
         >Dashboard</a
       >
       <a
-        *ngIf="!email"
+        *ngIf="!user"
         [routerLink]="['/signin']"
         routerLinkActive="active"
         class="nav-item nav-link"
         >Signin</a
       >
       <a
-        *ngIf="!email"
+        *ngIf="!user"
         [routerLink]="['/signup']"
         routerLinkActive="active"
         class="nav-item nav-link"
         >Signup</a
       >
-      <a *ngIf="email" class="nav-item nav-link" (click)="handleSignout()"
+      <a *ngIf="user" class="nav-item nav-link" (click)="handleSignout()"
         >Logout</a
       >
     </div>

@@ -21,6 +21,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { SigninWithPhoneComponent } from './pages/signin-with-phone/signin-with-phone.component';
+import { AuthGuard } from './_helpers/auth.guard';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { SigninWithPhoneComponent } from './pages/signin-with-phone/signin-with-
     AngularFireDatabaseModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
