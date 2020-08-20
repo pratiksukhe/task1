@@ -66,7 +66,9 @@ export class SignupComponent implements OnInit {
       .signUp(email, password)
       .then((res) => {
         console.log(res);
+
         const { uid } = res.user;
+
         this.database.object(`/users/${uid}`).set({
           id: uid,
           firstName: firstName,
@@ -74,10 +76,9 @@ export class SignupComponent implements OnInit {
           email: email,
           role: role,
         });
-      })
-      .then(() => {
-        this.router.navigateByUrl('/dashboard');
+        localStorage.setItem('user', JSON.stringify(res.user));
         this.toastr.success('SignUp Success..!');
+        this.router.navigateByUrl('/dashboard');
       })
       .catch((error) => {
         this.toastr.error('Something is going wrong in signup' + error.message);

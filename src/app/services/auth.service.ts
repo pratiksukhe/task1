@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userData: object;
+  userData: Object;
 
   constructor(private auth: AngularFireAuth) {
     this.auth.authState.subscribe((user) => {
@@ -34,6 +35,16 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return user !== null ? true : false;
+  }
+
+  getAll() {
+    return firebase
+      .database()
+      .ref(`/users`)
+      .once('value')
+      .then((snapshot) => {
+        return snapshot.val();
+      });
   }
 
   signOut() {

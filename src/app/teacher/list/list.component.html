@@ -1,0 +1,32 @@
+<div class="container">
+  <h1 class="text-color mat-h1">Students</h1>
+</div>
+<div class="container">
+  <a mat-raised-button color="accent" [routerLink]="['/add']">Add Students</a>
+</div>
+
+<div class="container">
+  <table class="mat-elevation-z8">
+    <thead>
+      <tr class="text-color">
+        <th style="width: 10%;">First Name</th>
+        <th style="width: 10%;">Last Name</th>
+        <th style="width: 10%;">Email</th>
+        <th style="width: 10%;">Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+      </tr>
+      <tr *ngIf="!users">
+        <td colspan="4" class="text-center">
+          <span class="spinner-border spinner-border-lg align-center"></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

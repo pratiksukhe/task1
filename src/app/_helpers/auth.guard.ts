@@ -22,13 +22,19 @@ export class AuthGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
+
     state: RouterStateSnapshot
   ):
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.auth.isLoggedIn) {
+    const currentUser = this.auth.isLoggedIn;
+    if (currentUser) {
+      if (next.data.role && next.data.role === 'Student') {
+        this.router.navigate(['dashboard']);
+        return false;
+      }
       return true;
     } else {
       this.toastr.error('Access denied please login first..!!');

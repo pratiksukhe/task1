@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../services/auth.service';
+import { Role } from '../../models/role';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit {
   async handleSignout() {
     try {
       const res = await this.auth.signOut();
+      localStorage.removeItem('user');
       this.router.navigateByUrl('/signin');
       this.toastr.info('Login again to continue');
       this.email = null;

@@ -6,6 +6,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
+import { MaterialModule } from './material/material.module';
+
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SigninComponent } from './pages/signin/signin.component';
@@ -37,6 +39,7 @@ import { AuthGuard } from './_helpers/auth.guard';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
