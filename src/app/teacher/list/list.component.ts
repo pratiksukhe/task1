@@ -29,7 +29,7 @@ export class ListComponent implements OnInit {
       .then((result) => {
         console.log(result);
         Object.keys(result).map((key) => {
-          this.users.push(key);
+          this.users.push({ [key]: result[key] });
         });
 
         console.log(this.users);
