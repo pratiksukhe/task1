@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { TeacherRoutingModule } from './teacher-routing.module';
 import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
@@ -14,6 +15,12 @@ import { MaterialModule } from '../material/material.module';
     ListComponent,
     LayoutComponent,
   ],
-  imports: [CommonModule, MaterialModule, TeacherRoutingModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    TeacherRoutingModule,
+  ],
 })
 export class TeacherModule {}

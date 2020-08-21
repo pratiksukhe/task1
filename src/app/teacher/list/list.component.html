@@ -2,25 +2,44 @@
   <h1 class="text-color mat-h1">Students</h1>
 </div>
 <div class="container">
-  <a mat-raised-button color="accent" [routerLink]="['/add']">Add Students</a>
+  <a mat-raised-button color="accent" [routerLink]="['/signup']"
+    >Add Students</a
+  >
 </div>
 
 <div class="container">
-  <table class="mat-elevation-z8">
+  <table class="table">
     <thead>
       <tr class="text-color">
-        <th style="width: 10%;">First Name</th>
-        <th style="width: 10%;">Last Name</th>
-        <th style="width: 10%;">Email</th>
+        <th style="width: 20%;">First Name</th>
+        <th style="width: 20%;">Last Name</th>
+        <th style="width: 20%;">Email</th>
         <th style="width: 10%;">Role</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users">
+      <tr class="text-color" *ngFor="let user of users">
         <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
+        <td>
+          <a mat-raised-button routerLink="edit/{{ user.id }}" color="primary"
+            >Edit</a
+          >
+          <button
+            mat-raised-button
+            (click)="deleteUser(user.id)"
+            color="warn"
+            [disabled]="user.isDeleting"
+          >
+            <span
+              *ngIf="user.isDeleting"
+              class="spinner-border spinner-border-sm"
+            ></span>
+            <span *ngIf="!user.isDeleting">Delete</span>
+          </button>
+        </td>
       </tr>
       <tr *ngIf="!users">
         <td colspan="4" class="text-center">

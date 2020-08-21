@@ -46,6 +46,15 @@ export class AuthService {
         return snapshot.val();
       });
   }
+  getById(id) {
+    return firebase
+      .database()
+      .ref(`/users/${id}`)
+      .once('value')
+      .then((snapshot) => {
+        return snapshot.val();
+      });
+  }
 
   signOut() {
     this.auth.signOut();

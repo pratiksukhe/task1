@@ -1,16 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from '../../services/auth.service';
-import { first } from 'rxjs/operators';
-
-interface user {
-  email: string;
-  firstName: string;
-  id: string;
-  lastName: string;
-
-  role: string;
-}
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import * as firebase from 'firebase';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -18,9 +11,13 @@ interface user {
 })
 export class ListComponent implements OnInit {
   users: any[] = [];
+
   constructor(
-    private database: AngularFireDatabase,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private db: AngularFireDatabase
   ) {}
 
   ngOnInit() {
@@ -29,11 +26,17 @@ export class ListComponent implements OnInit {
       .then((result) => {
         console.log(result);
         Object.keys(result).map((key) => {
-          this.users.push({ [key]: result[key] });
+          this.users.push(result[key]);
         });
 
         console.log(this.users);
       })
       .catch((error) => console.log(error));
+  }
+
+  deleteUser(id) {
+    this.db.object(`/users/${id}`).remove();
+    this.toastr.success('deleted successfully.!!');
+    this.router.navigateByUrl('/teacher');
   }
 }
