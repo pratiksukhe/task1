@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: Object;
+  private links = new Array<{ text: string; path: string }>();
 
   constructor(private auth: AngularFireAuth) {
     this.auth.authState.subscribe((user) => {
@@ -30,6 +32,18 @@ export class AuthService {
 
   getUser() {
     return this.auth.authState;
+  }
+
+  updateNavAfterAuth(role: string): void {
+    if (role === 'Student') {
+      this.links.push({ text: 'Student Dashboard', path: 'student' });
+    } else if (role === 'Teacher') {
+      this.links.push({ text: 'Teacher Dashboard', path: 'teacher' });
+    }
+  }
+
+  getLinks() {
+    return this.links;
   }
 
   get isLoggedIn(): boolean {

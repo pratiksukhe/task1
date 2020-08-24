@@ -76,7 +76,8 @@ export class SignupComponent implements OnInit {
           email: email,
           role: role,
         });
-        localStorage.setItem('user', JSON.stringify(res.user));
+        //localStorage.setItem('user', JSON.stringify(res.user));
+
         this.toastr.success('SignUp Success..!');
         this.router.navigateByUrl('/dashboard');
       })

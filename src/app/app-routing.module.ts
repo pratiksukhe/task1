@@ -20,17 +20,18 @@ const routes: Routes = [
   { path: 'phone', component: SigninWithPhoneComponent },
 
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  {
-    path: 'teacher',
-    canActivate: [AuthGuard],
-    loadChildren: () =>
-      import('./teacher/teacher.module').then((m) => m.TeacherModule),
-  },
-  {
-    path: 'student',
-    loadChildren: () =>
-      import('./student/student.module').then((m) => m.StudentModule),
-  },
+  // {
+  //   path: 'teacher',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () =>
+  //     import('./teacher/teacher.module').then((m) => m.TeacherModule),
+  //   data: { roles: [Role.Teacher] },
+  // },
+  // {
+  //   path: 'student',
+  //   loadChildren: () =>
+  //     import('./student/student.module').then((m) => m.StudentModule),
+  // },
 
   {
     path: '**',

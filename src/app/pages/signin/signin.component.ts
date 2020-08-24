@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   submitted = false;
+  id: string;
+  users: any[] = [];
   constructor(
     private formbuilder: FormBuilder,
     private router: Router,
@@ -40,6 +42,14 @@ export class SigninComponent implements OnInit {
     this.auth
       .signIn(email, password)
       .then((res) => {
+        this.id = res.user.uid;
+        this.auth
+          .getById(this.id)
+          .then((result) => {
+            console.log(result.role);
+            this.auth.updateNavAfterAuth(result.role);
+          })
+          .catch((error) => console.log(error));
         localStorage.setItem('user', JSON.stringify(res.user));
         this.toastr.success('SignIn Success...!!');
         this.router.navigate(['dashboard']);

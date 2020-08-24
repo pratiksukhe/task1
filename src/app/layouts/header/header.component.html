@@ -25,13 +25,25 @@
         class="nav-item nav-link"
         >Signup</a
       >
-      <a
+      <!-- <a
         *ngIf="user"
         [routerLink]="['/teacher']"
         class="nav-item nav-link"
         routerLinkActive="active"
         >teacher dashboard</a
       >
+
+      <a
+        *ngIf="user"
+        [routerLink]="['/student']"
+        class="nav-item nav-link"
+        routerLinkActive="active"
+        >student-dashboard</a
+      > -->
+
+      <li class="nav-item" *ngFor="let link of links">
+        <a class="nav-link" [routerLink]="link.path">{{ link.text }}</a>
+      </li>
       <a *ngIf="user" class="nav-item nav-link" (click)="handleSignout()"
         >Logout</a
       >
