@@ -37,6 +37,18 @@ export class ListComponent implements OnInit {
   deleteUser(id) {
     this.db.object(`/users/${id}`).remove();
     this.toastr.success('deleted successfully.!!');
+
+    this.auth
+      .getAll()
+      .then((result) => {
+        console.log(result);
+        Object.keys(result).map((key) => {
+          this.users.push(result[key]);
+        });
+
+        console.log(this.users);
+      })
+      .catch((error) => console.log(error));
     this.router.navigateByUrl('/teacher');
   }
 }

@@ -24,28 +24,15 @@ export class SignupComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  ngOnInit() {
-    this.registerForm = this.formbuilder.group(
-      {
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        role: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        confirmPassword: ['', Validators.required],
-        acceptTandC: [false, Validators.requiredTrue],
-      },
-      {
-        validators: passwordChecker('password', 'confirmPassword'),
-      }
-    );
+  ngOnInit(): void {
+    this.formValidation();
   }
 
   get h() {
     return this.registerForm.controls;
   }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
     if (this.registerForm.invalid) {
       return;
@@ -76,7 +63,8 @@ export class SignupComponent implements OnInit {
           email: email,
           role: role,
         });
-        //localStorage.setItem('user', JSON.stringify(res.user));
+
+        localStorage.setItem('user', JSON.stringify(res.user));
 
         this.toastr.success('SignUp Success..!');
         this.router.navigateByUrl('/dashboard');
@@ -84,7 +72,24 @@ export class SignupComponent implements OnInit {
       .catch((error) => {
         this.toastr.error('Something is going wrong in signup' + error.message);
       });
-    //alert('Success Signup\n' + JSON.stringify(this.registerForm.value));
+    // alert('Success Signup\n' + JSON.stringify(this.registerForm.value));
+  }
+
+  formValidation(): void {
+    this.registerForm = this.formbuilder.group(
+      {
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        role: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        confirmPassword: ['', Validators.required],
+        acceptTandC: [false, Validators.requiredTrue],
+      },
+      {
+        validators: passwordChecker('password', 'confirmPassword'),
+      }
+    );
   }
 
   onReset() {

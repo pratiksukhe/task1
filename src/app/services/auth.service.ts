@@ -7,10 +7,21 @@ import * as firebase from 'firebase/app';
 })
 export class AuthService {
   userData: Object;
-  private links = new Array<{ text: string; path: string }>();
+  public links = new Array<{ text: string; path: string }>();
 
   constructor(private auth: AngularFireAuth) {
     this.auth.authState.subscribe((user) => {
+      this.getById(user.uid)
+        .then((result) => {
+          console.log(result.role);
+          if (result.role === 'Student') {
+            this.links.push({ text: 'Student Dashboard', path: 'student' });
+          } else if (result.role === 'Teacher') {
+            this.links.push({ text: 'Teacher Dashboard', path: 'teacher' });
+          }
+          //this.updateNavAfterAuth(result.role);
+        })
+        .catch((error) => console.log(error));
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -34,13 +45,13 @@ export class AuthService {
     return this.auth.authState;
   }
 
-  updateNavAfterAuth(role: string): void {
-    if (role === 'Student') {
-      this.links.push({ text: 'Student Dashboard', path: 'student' });
-    } else if (role === 'Teacher') {
-      this.links.push({ text: 'Teacher Dashboard', path: 'teacher' });
-    }
-  }
+  // updateNavAfterAuth(role: string): void {
+  //   if (role === 'Student') {
+  //     this.links.push({ text: 'Student Dashboard', path: 'student' });
+  //   } else if (role === 'Teacher') {
+  //     this.links.push({ text: 'Teacher Dashboard', path: 'teacher' });
+  //   }
+  // }
 
   getLinks() {
     return this.links;

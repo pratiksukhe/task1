@@ -18,9 +18,14 @@ export class HeaderComponent implements OnInit {
     private toastr: ToastrService,
     private auth: AuthService
   ) {
+    this.links = this.auth.getLinks();
     auth.getUser().subscribe((user) => {
       this.user = user;
     });
+  }
+
+  ngOnInit(): void {
+    console.log(this.links);
 
     this.router.config.unshift(
       {
@@ -38,11 +43,7 @@ export class HeaderComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
-    this.links = this.auth.getLinks();
-  }
-
-  async handleSignout() {
+  async handleSignout(): Promise<void> {
     try {
       const res = await this.auth.signOut();
       this.links = null;
